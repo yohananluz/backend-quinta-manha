@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil #001 &bull; UserCore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="min-h-screen text-gray-200 flex flex-col selection:bg-cyan-500 selection:text-black">
+
+  <!-- Top Navigation Bar -->
+  <header class="border-b border-gray-800/80 bg-gray-950/60 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="./index.html" class="flex items-center space-x-3 group">
+        <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:border-cyan-400 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="font-bold text-lg tracking-wider text-white">USER<span class="text-cyan-400">CORE</span></span>
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <a href="./users-list.html" class="text-xs font-medium text-gray-400 hover:text-cyan-400 flex items-center space-x-1.5 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Voltar à lista</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-10 space-y-6">
+
+    <!-- Card Principal de Identificação -->
+    <div class="card-tech rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80"></div>
+      
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        
+        <div class="flex items-center space-x-5">
+          <div id="avatar-initials" class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/40 text-cyan-400 font-extrabold text-xl flex items-center justify-center shadow-lg shadow-cyan-500/10">
+            ...
+          </div>
+          <div>
+            <div class="flex items-center space-x-3">
+              <h1 id="user-name" class="text-xl sm:text-2xl font-extrabold text-white">Carregando...</h1>
+              <span id="user-id-badge" class="neon-badge px-2.5 py-0.5 rounded-full text-xs font-mono font-bold">
+                ...
+              </span>
+            </div>
+            <p id="user-header-info" class="text-xs text-gray-400 mt-1">Sincronizando com Render API...</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 self-end sm:self-center">
+          <a href="#" id="btn-edit-user" class="neon-glow-btn text-xs px-4 py-2 rounded-lg flex items-center space-x-1.5 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>Editar Usuário</span>
+          </a>
+          <button type="button" id="btn-delete-user" class="px-3 py-2 text-xs font-semibold text-red-400 hover:text-red-300 transition cursor-pointer">
+            Excluir
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Grid de Informações Essenciais -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+      <!-- Informações Cadastrais -->
+      <section class="card-tech rounded-2xl p-6 space-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-cyan-400 pb-3 border-b border-gray-800">
+          Dados Cadastrais
+        </h2>
+
+        <dl class="space-y-3 text-xs">
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Identificador</dt>
+            <dd id="detail-id" class="font-mono text-cyan-400 font-semibold">...</dd>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Nome</dt>
+            <dd id="detail-name" class="text-white font-medium">...</dd>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">E-mail</dt>
+            <dd id="detail-mail" class="text-white font-medium">...</dd>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Telefone</dt>
+            <dd id="detail-phone" class="font-mono text-white">...</dd>
+          </div>
+          <div class="flex justify-between py-1">
+            <dt class="text-gray-400">Criado em</dt>
+            <dd id="detail-created" class="text-gray-300 text-[11px]">...</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Segurança da Conta -->
+      <section class="card-tech rounded-2xl p-6 space-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-cyan-400 pb-3 border-b border-gray-800">
+          Segurança & Acesso
+        </h2>
+
+        <dl class="space-y-3 text-xs">
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Status da Conta</dt>
+            <dd class="text-emerald-400 font-semibold flex items-center space-x-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Ativo</span>
+            </dd>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Proteção de Senha</dt>
+            <dd class="text-gray-300 font-mono">Bcrypt Hash (10 rounds)</dd>
+          </div>
+          <div class="flex justify-between py-1 border-b border-gray-800/50">
+            <dt class="text-gray-400">Autenticação</dt>
+            <dd class="text-cyan-400 font-mono">POST /login</dd>
+          </div>
+          <div class="flex justify-between py-1">
+            <dt class="text-gray-400">Servidor</dt>
+            <dd class="text-white font-medium">Neon PostgreSQL</dd>
+          </div>
+        </dl>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="border-t border-gray-900 py-4 text-center text-xs text-gray-500">
+    UserCore &bull; Premium Tech Architecture
+  </footer>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/user-detail.js"></script>
+</body>
+</html>

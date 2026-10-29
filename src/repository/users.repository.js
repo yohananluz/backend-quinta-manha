@@ -1,4 +1,9 @@
 import { neon } from "@neondatabase/serverless"
+import dotenv from 'dotenv'
+dotenv.config()
+if (!process.env.DB) {
+    dotenv.config({ path: 'src/.env' })
+}
 
 const query = neon(process.env.DB)
 

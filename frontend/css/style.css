@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-main: #070a12;
+  --bg-card: rgba(13, 19, 33, 0.75);
+  --bg-card-hover: rgba(18, 26, 46, 0.85);
+  --neon-blue: #00f0ff;
+  --neon-blue-glow: rgba(0, 240, 255, 0.35);
+  --neon-blue-soft: rgba(0, 240, 255, 0.12);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-neon: rgba(0, 240, 255, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(0, 240, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 100% 40%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism & Neon Cards */
+.card-tech {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.25s ease;
+}
+
+.card-tech:hover {
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px -8px var(--neon-blue-glow);
+}
+
+/* Neon Glows */
+.neon-glow-btn {
+  background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+  color: #041019;
+  font-weight: 700;
+  box-shadow: 0 0 20px -3px rgba(0, 240, 255, 0.45);
+  transition: all 0.2s ease;
+}
+
+.neon-glow-btn:hover {
+  box-shadow: 0 0 28px 0px rgba(0, 240, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+.neon-badge {
+  background: rgba(0, 240, 255, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.neon-text-glow {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+/* Custom Table Row */
+.table-row-tech {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.15s ease;
+}
+
+.table-row-tech:hover {
+  background: rgba(0, 240, 255, 0.04);
+}
+
+/* Neon Inputs */
+.input-tech {
+  background: rgba(10, 15, 26, 0.8) !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+  color: #f8fafc !important;
+  transition: all 0.2s ease;
+}
+
+.input-tech:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 15px -2px rgba(0, 240, 255, 0.4) !important;
+  outline: none !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070a12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.4);
+}
