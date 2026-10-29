@@ -45,14 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await api.createUser({ name, phone, mail, password });
       
-      showFeedback(typeof response === 'string' ? response : 'Usuário cadastrado com sucesso!', false);
+      // Realiza a autenticação automática após a criação do cadastro
+      try {
+        await api.login(mail, password);
+      } catch (authError) {
+        console.warn('Aviso na autenticação pós-cadastro:', authError);
+      }
+
+      showFeedback('Usuário cadastrado e autenticado com sucesso! Redirecionando...', false);
 
       setTimeout(() => {
         window.location.href = './users-list.html';
       }, 1200);
 
     } catch (error) {
-      showFeedback('Erro ao cadastrar usuário: ' + error.message, true);
+      showFeedback(error.message || 'Erro ao cadastrar usuário.', true);
       submitBtn.disabled = false;
       submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
       if (submitBtnText) submitBtnText.textContent = 'Cadastrar Registro';

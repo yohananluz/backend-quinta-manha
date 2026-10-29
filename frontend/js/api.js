@@ -34,7 +34,7 @@ const api = {
       }
 
       if (!response.ok) {
-        throw new Error(typeof data === 'string' ? data : (data.message || 'Erro na requisição'));
+        throw new Error(typeof data === 'string' ? data : (data.mensagem || data.message || 'Erro na requisição'));
       }
 
       return data;
@@ -46,33 +46,40 @@ const api = {
 
   // POST /login
   async login(email, senha) {
-    const data = await this.request('/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, senha })
-    });
+    try {
+      const data = await this.request('/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: email.trim(), senha })
+      });
 
-    // O backend retorna uma string em caso de falha de autenticação
-    if (typeof data === 'string') {
+      // O backend pode retornar uma string ou objeto
+      if (typeof data === 'string') {
+        return { success: false, message: data };
+      }
+
+      if (data && data.sucesso === false) {
+        return { success: false, message: data.mensagem || 'Usuário ou senha incorreta.' };
+      }
+
+      if (data && (data.id || data.email || data.mensagem)) {
+        this.saveSession(data);
+        return {
+          success: true,
+          data,
+          message: data.mensagem || 'Logado com sucesso!'
+        };
+      }
+
       return {
         success: false,
-        message: data
+        message: 'Resposta inesperada do servidor.'
       };
-    }
-
-    // Sucesso retorna objeto com dados do usuário
-    if (data && (data.id || data.email || data.mensagem)) {
-      this.saveSession(data);
+    } catch (error) {
       return {
-        success: true,
-        data,
-        message: data.mensagem || 'Logado com sucesso!'
+        success: false,
+        message: error.message || 'Falha ao autenticar usuário.'
       };
     }
-
-    return {
-      success: false,
-      message: 'Resposta inesperada do servidor.'
-    };
   },
 
   // GET /users

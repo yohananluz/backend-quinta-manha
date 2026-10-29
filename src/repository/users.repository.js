@@ -7,60 +7,56 @@ if (!process.env.DB) {
 
 const query = neon(process.env.DB)
 
-
 const usersRepository = {
 
     async consultarTodo() {
         let usuarios = await query`
-            SELECT * FROM users;
+            SELECT id, name, mail, phone, created_at FROM users ORDER BY id;
         `
         return usuarios
     },
 
     async consultarUm(id) {
         let usuario = await query`
-            SELECT * FROM users WHERE id = ${id}
+            SELECT id, name, mail, phone, created_at, password FROM users WHERE id = ${id}
         `
         return usuario[0]
     },
 
     async consultaEmail(email) {
+        if (!email) return []
         let usuario = await query`
-            SELECT * FROM users WHERE mail = ${email}
+            SELECT * FROM users WHERE LOWER(TRIM(mail)) = LOWER(TRIM(${email}))
         `
         return usuario
     },
 
-
     async cadastrarNovo(name, phone, mail, password) {
+        const cleanMail = mail.toLowerCase().trim()
+        const cleanPhone = phone.trim()
         let novoUsuario = await query`
             INSERT INTO users (name, phone, mail, password)
-            VALUES (${name}, ${phone}, ${mail}, ${password});
+            VALUES (${name.trim()}, ${cleanPhone}, ${cleanMail}, ${password})
+            RETURNING id, name, phone, mail;
         `
-        return `O Usuario: ${name} foi cadastrado com sucesso!`
+        return novoUsuario[0]
     },
-
-
-
 
     async alterarRegistro(id, name, phone, mail, password, nomeAntigo) {
-
-
+        const cleanMail = mail.toLowerCase().trim()
+        const cleanPhone = phone.trim()
         let alteraUser = await query`
             UPDATE users 
-            SET name = ${name}, phone = ${phone}, mail = ${mail}, password = ${password}
+            SET name = ${name.trim()}, phone = ${cleanPhone}, mail = ${cleanMail}, password = ${password}
             WHERE id = ${id}
         `
-
         return `O usuario ${nomeAntigo}, foi alterado para o nome ${name}, com sucesso!`
     },
-
 
     async deletarRegistro(id) {
         let deleteUser = await query`
             DELETE FROM users WHERE id = ${id}
         `
-
         return `Usuario com ID: ${id}, deletado com sucesso!`
     }
 
