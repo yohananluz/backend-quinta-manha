@@ -1,6 +1,5 @@
-const api = window.api;
-
-document.addEventListener('DOMContentLoaded', () => {
+function initCreateUser() {
+  const api = window.api;
   const form = document.getElementById('create-user-form');
   const nameInput = document.getElementById('name');
   const phoneInput = document.getElementById('phone');
@@ -27,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitBtn.disabled = true;
     submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-    if (submitBtnText) submitBtnText.textContent = 'Gravando no Render...';
+    if (submitBtnText) submitBtnText.textContent = 'Gravando no banco...';
 
     try {
       const response = await api.createUser({ name, phone, mail, password });
@@ -65,4 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (submitBtnText) submitBtnText.textContent = 'Cadastrar Registro';
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCreateUser);
+} else {
+  initCreateUser();
+}

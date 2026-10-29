@@ -1,6 +1,6 @@
 const api = window.api;
 
-document.addEventListener('DOMContentLoaded', async () => {
+function initUserDetail() {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get('id');
 
@@ -91,4 +91,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initUserDetail);
+} else {
+  initUserDetail();
+}

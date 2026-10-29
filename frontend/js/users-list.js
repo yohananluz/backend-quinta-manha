@@ -2,7 +2,7 @@ const api = window.api;
 
 let allUsers = [];
 
-document.addEventListener('DOMContentLoaded', () => {
+function initUsersList() {
   const tableBody = document.getElementById('users-tbody');
   const totalUsersEl = document.getElementById('total-users-count');
   const displayedCountEl = document.getElementById('displayed-count');
@@ -185,4 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Carrega ao iniciar
   fetchUsers();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initUsersList);
+} else {
+  initUsersList();
+}

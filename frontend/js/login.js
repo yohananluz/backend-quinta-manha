@@ -1,6 +1,5 @@
-const api = window.api;
-
-document.addEventListener('DOMContentLoaded', () => {
+function initLogin() {
+  const api = window.api;
   const form = document.getElementById('login-form');
   const emailInput = document.getElementById('email');
   const senhaInput = document.getElementById('senha');
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const email = emailInput.value.trim();
     const senha = senhaInput.value;
@@ -60,4 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (submitBtnText) submitBtnText.textContent = 'Entrar';
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLogin);
+} else {
+  initLogin();
+}

@@ -21,7 +21,7 @@ const fastify = Fastify({
     logger: true
 })
 
-await fastify.register(cors, { 
+await fastify.register(cors, {
     methods: '*',
     origin: '*'
 })
