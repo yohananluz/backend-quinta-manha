@@ -15,6 +15,7 @@ const __dirname = path.dirname(__filename)
 
 import usersRoutes from './routes/users.routes.js'
 import authRoutes from './routes/auth.routes.js'
+import usersRepository from './repository/users.repository.js'
 
 const fastify = Fastify({
     logger: true
@@ -38,6 +39,9 @@ fastify.get('/api/health', (req, reply) => {
 
 await fastify.register(usersRoutes)
 await fastify.register(authRoutes)
+
+// Inicializa a tabela users caso seja um novo banco de dados
+await usersRepository.initTable()
 
 // Run the server!
 const port = Number(process.env.PORT) || 3000

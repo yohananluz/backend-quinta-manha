@@ -9,6 +9,23 @@ const query = neon(process.env.DB)
 
 const usersRepository = {
 
+    async initTable() {
+        try {
+            await query`
+                CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    phone TEXT NOT NULL UNIQUE,
+                    mail TEXT NOT NULL UNIQUE,
+                    password VARCHAR(255) NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            `
+        } catch (err) {
+            console.error("[DB Error] Falha ao verificar/criar tabela users:", err)
+        }
+    },
+
     async consultarTodo() {
         let usuarios = await query`
             SELECT id, name, mail, phone, created_at FROM users ORDER BY id;

@@ -3,8 +3,15 @@
  * Backend URL: https://backend-quinta-manha-gu89.onrender.com
  */
 
-// Detecta automaticamente a URL da API: usa a origem atual (se servido via HTTP/Render) ou fallback do Render (se aberto via file://)
-const API_BASE_URL = (typeof window !== 'undefined' && window.location.origin && window.location.origin.startsWith('http'))
+// Detecta automaticamente a URL da API: se servido pelo Fastify/Render usa a mesma origem. Se aberto via Live Server (5500) ou file://, usa a URL do Render
+const isStaticDevServer = typeof window !== 'undefined' && (
+  window.location.protocol === 'file:' ||
+  window.location.port === '5500' ||
+  window.location.port === '5501' ||
+  window.location.port === '5502'
+);
+
+const API_BASE_URL = (!isStaticDevServer && typeof window !== 'undefined' && window.location.origin && window.location.origin.startsWith('http'))
   ? window.location.origin
   : 'https://backend-quinta-manha-gu89.onrender.com';
 
