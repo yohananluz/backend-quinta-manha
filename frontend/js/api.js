@@ -22,9 +22,13 @@
     async request(endpoint, options = {}) {
       const url = `${this.baseUrl}${endpoint}`;
       const headers = {
-        'Content-Type': 'application/json',
         ...(options.headers || {})
       };
+
+      // Só adiciona Content-Type se houver um corpo na requisição
+      if (options.body) {
+        headers['Content-Type'] = 'application/json';
+      }
 
       try {
         const response = await fetch(url, {
